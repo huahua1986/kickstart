@@ -62,6 +62,11 @@ vim
 net-tools
 sysstat
 nmon
+epel-release
+yum-utils
+device-mapper-persistent-data
+lvm2
+docker-ce
 %end
 
 %post --nochroot
@@ -84,6 +89,7 @@ $SNIPPET('cobbler_register')
 $SNIPPET('post_anamon')
 # Start final steps
 $SNIPPET('kickstart_done')
-cd /etc/yum.repos.d/ && ls |grep Cent |xargs -n1 -i mv {} {}.bak && cd
+echo 'proxy=http://192.168.123.10:8888' >> /etc/yum.conf
+echo 'proxy=https://192.168.123.10:8888' >> /etc/yum.conf
 # End final steps
 %end
